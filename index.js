@@ -27,11 +27,17 @@ async function run() {
   try {
     await client.connect();
       const database = client.db("petadoption");
-      const petsCollection = database.collection("petadoption");
+      const petsCollection = database.collection("pets");
 
       app.post('/petadoption', async (req, res) => {
         const pet = req.body;
         const result = await petsCollection.insertOne(pet);
+        res.json(result);
+        console.log(result);
+      })
+      app.get('/petadoption', async (req, res) => {
+        const cursor = petsCollection.find();
+        const result = await cursor.toArray();
         res.json(result);
         console.log(result);
       })

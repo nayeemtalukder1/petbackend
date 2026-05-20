@@ -5,7 +5,7 @@ const app = express()
 app.use(cors());
 app.use(express.json());
 const port = process.env.PORT || 5000;
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 console.log(process.env.MONGO_URI)
 
@@ -41,6 +41,12 @@ async function run() {
         res.json(result);
         console.log(result);
       })
+
+app.get('/petadoption/:id', async (req, res) => {
+  const id = req.params.id;
+  const pet = await petsCollection.findOne({_id: new ObjectId(id)});
+  res.json(pet);
+});
 
 
 

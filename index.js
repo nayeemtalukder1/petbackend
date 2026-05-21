@@ -33,7 +33,7 @@ async function run() {
 
   
   try {
-    // await client.connect();
+    await client.connect();
       const database = client.db("petadoption");
       const petsCollection = database.collection("pets");
 

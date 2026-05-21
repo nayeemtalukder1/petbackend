@@ -48,9 +48,15 @@ app.get('/petadoption/:id', async (req, res) => {
   res.json(pet);
 });
 
-
-
-
+app.put('/petadoption/:id', async (req, res) => {
+  const id = req.params.id;
+  const updatedPet = req.body;
+  const result = await petsCollection.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: updatedPet }
+  );
+  res.json(result);
+});
 
 
     await client.db("admin").command({ ping: 1 });

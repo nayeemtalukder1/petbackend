@@ -58,6 +58,12 @@ app.put('/petadoption/:id', async (req, res) => {
   res.json(result);
 });
 
+app.delete('/petadoption/:id', async (req, res) => {
+  const id = req.params.id;
+  const result = await petsCollection.deleteOne({ _id: new ObjectId(id) });
+  res.json(result);
+});
+
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
